@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="05ba797a-0f0e-4190-910d-4923103acd74" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1XPgFmCIf1GWqXrABCPXDgCbVtq" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="findjar.last.used.dir" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/sampleImages" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="android.dex.compiler" />
+  </component>
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="JImageViewer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="JImageViewer" />
+      <module name="JImageViewer" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="JImageViewer" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/sampleImages" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.JImageViewer" />
+      <item itemvalue="Application.Main" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.JImageViewer" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="05ba797a-0f0e-4190-910d-4923103acd74" name="Default Changelist" comment="" />
+      <created>1580953041844</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1580953041844</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="732" y="295" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1581102778957">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="732" y="295" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1581102778957" />
+    <state width="450" height="466" key="DebuggerActiveHint" timestamp="1581109733560">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="450" height="466" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1581109733560" />
+    <state x="1058" y="381" key="FileChooserDialogImpl" timestamp="1581102767843">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1058" y="381" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1581102767843" />
+    <state width="1094" height="335" key="GridCell.Tab.0.bottom" timestamp="1581111830239">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1094" height="335" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1581111830239" />
+    <state width="1094" height="335" key="GridCell.Tab.0.center" timestamp="1581111830239">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1094" height="335" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1581111830239" />
+    <state width="1094" height="335" key="GridCell.Tab.0.left" timestamp="1581111830239">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1094" height="335" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1581111830239" />
+    <state width="1094" height="335" key="GridCell.Tab.0.right" timestamp="1581111830239">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1094" height="335" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1581111830239" />
+    <state width="1094" height="335" key="GridCell.Tab.1.bottom" timestamp="1581111830239">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1094" height="335" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1581111830239" />
+    <state width="1094" height="335" key="GridCell.Tab.1.center" timestamp="1581111830239">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1094" height="335" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1581111830239" />
+    <state width="1094" height="335" key="GridCell.Tab.1.left" timestamp="1581111830239">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1094" height="335" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1581111830239" />
+    <state width="1094" height="335" key="GridCell.Tab.1.right" timestamp="1581111830239">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1094" height="335" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1581111830239" />
+    <state x="781" y="196" key="SettingsEditor" timestamp="1580957183611">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="781" y="196" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1580957183611" />
+    <state x="303" y="348" key="com.intellij.ide.util.TipDialog" timestamp="1581112039923">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="303" y="348" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1581112039923" />
+    <state x="985" y="276" width="585" height="488" key="find.popup" timestamp="1581085464600">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="985" y="276" width="585" height="488" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1581085464600" />
+    <state x="934" y="242" key="run.anything.popup" timestamp="1581018420955">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="934" y="242" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1581018420955" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/ImageData.java</url>
+          <line>87</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/ColorImageData.java</url>
+          <line>60</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
