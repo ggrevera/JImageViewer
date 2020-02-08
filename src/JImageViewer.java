@@ -128,7 +128,7 @@ public class JImageViewer extends JFrame implements ActionListener {
                     "bmp", "gif", "ico", "jpg", "png", "pgm", "pnm", "ppm", "tif", "wav"
             );
 
-            //set default dir (if any)
+            //set default dir to previous one (if any)
             String d = prefs.get( "dir", null );
             JFileChooser chooser;
             if (d == null)    chooser = new JFileChooser();
@@ -138,9 +138,13 @@ public class JImageViewer extends JFrame implements ActionListener {
             chooser.setFileFilter( filter );
             int ret = chooser.showOpenDialog( this );
             if (ret == JFileChooser.APPROVE_OPTION) {
-                d = chooser.getCurrentDirectory().getAbsolutePath();
-                prefs.put( "dir", d );
+                //update only if changed
+                String newD = chooser.getCurrentDirectory().getAbsolutePath();
+                if (!newD.equals(d))    prefs.put( "dir", newD );
+
+                //single file selection:
                 //new JImageViewer( chooser.getSelectedFile().getAbsolutePath() );
+
                 //handle multiple file selection
                 File[] f = chooser.getSelectedFiles();
                 for (int i=0; i<f.length; i++) {
