@@ -26,10 +26,10 @@
  */
 //package jimageviewer;
 
-import java.awt.*;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.filechooser.FileFilter;
+import java.util.prefs.Preferences;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -51,6 +51,8 @@ public class JImageViewer extends JFrame implements ActionListener {
     JMenuItem   mExit       = new JMenuItem( "Exit" );     ///< exit menu item
     ImagePanel  mImagePanel = new ImagePanel( this );       ///< panel in which an image may be displayed
     ImageData   mImage;                                        ///< actual image data
+
+    static Preferences prefs = Preferences.userRoot();  ///< for user preferences ("dir" is last dir)
     //----------------------------------------------------------------------
     /** \brief Ctor that simply creates an empty window.
      *  \returns nothing (ctor)
@@ -114,14 +116,19 @@ public class JImageViewer extends JFrame implements ActionListener {
         if (e.getSource() == mExit) {
             System.exit(0);
         } else if (e.getSource() == mOpen) {
+            String d = prefs.get( "dir", null );
             FileNameExtensionFilter filter = new FileNameExtensionFilter(
                     "image & audio files",
                     "bmp", "gif", "ico", "jpg", "png", "pgm", "pnm", "ppm", "tif", "wav"
             );
-            JFileChooser chooser = new JFileChooser();
+            JFileChooser chooser;
+            if (d == null)    chooser = new JFileChooser();
+            else              chooser = new JFileChooser( d );
             chooser.setFileFilter( filter );
             int ret = chooser.showOpenDialog( this );
             if (ret == JFileChooser.APPROVE_OPTION) {
+                d = chooser.getCurrentDirectory().getAbsolutePath();
+                prefs.put( "dir", d );
                 new JImageViewer( chooser.getSelectedFile().getAbsolutePath() );
             }
         } else {
