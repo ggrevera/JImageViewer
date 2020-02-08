@@ -31,13 +31,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.prefs.Preferences;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 //----------------------------------------------------------------------
 /** \brief instantiate this class to display an image */
@@ -53,6 +47,8 @@ public class JImageViewer extends JFrame implements ActionListener {
     ImagePanel  mImagePanel = new ImagePanel( this );       ///< panel in which an image may be displayed
     ImageData   mImage;                                        ///< actual image data
 
+    //better to migrate to file as opposed to using windows registry.
+    // see http://www.davidc.net/programming/java/java-preferences-using-file-backing-store
     private static Preferences prefs = Preferences.userRoot();  ///< for user preferences ("dir" is last dir)
     private static int windowPosition = 50;
     //----------------------------------------------------------------------
@@ -60,11 +56,7 @@ public class JImageViewer extends JFrame implements ActionListener {
      *  \returns nothing (ctor)
      */
     public JImageViewer ( ) {
-        try {
-            init( null );
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        init( null );
     }
     //----------------------------------------------------------------------
     /** \brief Ctor that given the name of an image file, displays that
@@ -73,11 +65,7 @@ public class JImageViewer extends JFrame implements ActionListener {
      *  \returns nothing (ctor)
      */
     public JImageViewer ( String fname ) {
-        try {
-            init( fname );
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        init( fname );
     }
     //----------------------------------------------------------------------
     /** \brief Load and display an image.
@@ -85,6 +73,7 @@ public class JImageViewer extends JFrame implements ActionListener {
      *  \returns nothing (void)
      */
     private void init ( String fn ) {
+        setDefaultCloseOperation( WindowConstants.EXIT_ON_CLOSE );
         setupMenu();
         //was a file name specified?
         if (fn != null) {
@@ -93,25 +82,21 @@ public class JImageViewer extends JFrame implements ActionListener {
             mImage = ImageData.load( fn );
             System.out.println( "Loading this image file required "
                               + t.getElapsedTimeNano() + " seconds." );
-        }
-        //getContentPane().add( new JScrollPane(mImagePanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED) );
-        getContentPane().add( new JScrollPane(mImagePanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED) );
-        if (fn == null) {
-            setSize( 800, 600 );
-            setPreferredSize( new Dimension(800,600) );
-            setTitle( "JImageViewer: <empty>" );
+            mImagePanel.setPreferredSize( new Dimension(mImage.mW,mImage.mH) );
+            setTitle( "JImageViewer: " + fn   );
         } else {
-            //setSize( mImage.mW + 100, mImage.mH + 100 );
-            setSize( 800, 600 );
-            setPreferredSize( new Dimension(800,600) );
-            setTitle( "JImageViewer: " + fn );
+            setTitle( "JImageViewer: <empty>" );
         }
-
+        JScrollPane jsp = new JScrollPane( mImagePanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED );
+        jsp.setDoubleBuffered( true );
+        add( jsp );
+        setSize( 800, 600 );
+        setPreferredSize( new Dimension(800,600) );
         //make sure windows do not overlay each other
         setLocation( windowPosition, windowPosition );
         windowPosition += 50;
         windowPosition %= 800;
-
+        pack();
         setVisible( true );
     }
     //----------------------------------------------------------------------

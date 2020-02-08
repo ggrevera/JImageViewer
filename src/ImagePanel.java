@@ -46,7 +46,7 @@ class ImagePanel extends JPanel implements MouseMotionListener {
     private int      mMouseX;                  ///< mouse movement x position
     private int      mMouseY;                  ///< mouse movement y position
     private Image    mDoubleBuffer = null;     ///< to avoid flicker
-    private double   Zoom = 1.0;               ///< zoom/scale factor
+    public  double   mZoom = 1.0;              ///< zoom/scale factor
     //----------------------------------------------------------------------
     /** \brief Ctor.
      *  \param p refers to JImageViewer in which this ImagePanel appears
@@ -54,7 +54,8 @@ class ImagePanel extends JPanel implements MouseMotionListener {
      */
     ImagePanel ( JImageViewer p ) {
         mParent = p;
-        this.addMouseMotionListener( this );
+        setDoubleBuffered( true );
+        addMouseMotionListener( this );
     }
     //----------------------------------------------------------------------
     /** \brief Simply call paint.
@@ -88,8 +89,8 @@ class ImagePanel extends JPanel implements MouseMotionListener {
         dbg.fillRect( 0, 0, d.width, d.height );
         if (mParent.mImage!=null && mParent.mImage.mDisplayImage!=null) {
             dbg.drawImage( mParent.mImage.mDisplayImage, 0, 0,
-                    (int)(mParent.mImage.mW * Zoom + 0.5),
-                    (int)(mParent.mImage.mH * Zoom + 0.5), null );
+                    (int)(mParent.mImage.mW * mZoom + 0.5),
+                    (int)(mParent.mImage.mH * mZoom + 0.5), null );
         }
 
         if (mMouseMoveValid) {
