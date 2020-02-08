@@ -29,6 +29,7 @@
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.prefs.Preferences;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -52,7 +53,8 @@ public class JImageViewer extends JFrame implements ActionListener {
     ImagePanel  mImagePanel = new ImagePanel( this );       ///< panel in which an image may be displayed
     ImageData   mImage;                                        ///< actual image data
 
-    static Preferences prefs = Preferences.userRoot();  ///< for user preferences ("dir" is last dir)
+    private static Preferences prefs = Preferences.userRoot();  ///< for user preferences ("dir" is last dir)
+    private static int windowPosition = 50;
     //----------------------------------------------------------------------
     /** \brief Ctor that simply creates an empty window.
      *  \returns nothing (ctor)
@@ -104,7 +106,12 @@ public class JImageViewer extends JFrame implements ActionListener {
             setPreferredSize( new Dimension(800,600) );
             setTitle( "JImageViewer: " + fn );
         }
-        setLocation( 50, 50 );
+
+        //make sure windows do not overlay each other
+        setLocation( windowPosition, windowPosition );
+        windowPosition += 50;
+        windowPosition %= 800;
+
         setVisible( true );
     }
     //----------------------------------------------------------------------
@@ -116,20 +123,29 @@ public class JImageViewer extends JFrame implements ActionListener {
         if (e.getSource() == mExit) {
             System.exit(0);
         } else if (e.getSource() == mOpen) {
-            String d = prefs.get( "dir", null );
             FileNameExtensionFilter filter = new FileNameExtensionFilter(
                     "image & audio files",
                     "bmp", "gif", "ico", "jpg", "png", "pgm", "pnm", "ppm", "tif", "wav"
             );
+
+            //set default dir (if any)
+            String d = prefs.get( "dir", null );
             JFileChooser chooser;
             if (d == null)    chooser = new JFileChooser();
             else              chooser = new JFileChooser( d );
+
+            chooser.setMultiSelectionEnabled( true );  //multiple (more than 1)
             chooser.setFileFilter( filter );
             int ret = chooser.showOpenDialog( this );
             if (ret == JFileChooser.APPROVE_OPTION) {
                 d = chooser.getCurrentDirectory().getAbsolutePath();
                 prefs.put( "dir", d );
-                new JImageViewer( chooser.getSelectedFile().getAbsolutePath() );
+                //new JImageViewer( chooser.getSelectedFile().getAbsolutePath() );
+                //handle multiple file selection
+                File[] f = chooser.getSelectedFiles();
+                for (int i=0; i<f.length; i++) {
+                    new JImageViewer( f[i].getAbsolutePath() );
+                }
             }
         } else {
             /** \todo handle Close, Save, Save As, etc.
