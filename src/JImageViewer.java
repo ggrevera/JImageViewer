@@ -44,8 +44,9 @@ public class JImageViewer extends JFrame implements ActionListener {
     JMenuItem   mSave       = new JMenuItem( "Save" );     ///< save menu item
     JMenuItem   mSaveAs     = new JMenuItem( "Save As" );  ///< save as menu item
     JMenuItem   mExit       = new JMenuItem( "Exit" );     ///< exit menu item
-    ImagePanel  mImagePanel = new ImagePanel( this );       ///< panel in which an image may be displayed
-    ImageData   mImage;                                        ///< actual image data
+    ImagePanel  mImagePanel = new ImagePanel( this );        ///< panel in which an image may be displayed
+    ImageData   mImage;                                         ///< actual image data
+    JScrollPane mJsp;                                           ///< image scroller
 
     //better to migrate to file as opposed to using windows registry.
     // see http://www.davidc.net/programming/java/java-preferences-using-file-backing-store
@@ -87,9 +88,9 @@ public class JImageViewer extends JFrame implements ActionListener {
         } else {
             setTitle( "JImageViewer: <empty>" );
         }
-        JScrollPane jsp = new JScrollPane( mImagePanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED );
-        jsp.setDoubleBuffered( true );
-        add( jsp );
+        mJsp = new JScrollPane( mImagePanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED );
+        mJsp.setDoubleBuffered( true );
+        add( mJsp );
         setSize( 800, 600 );
         setPreferredSize( new Dimension(800,600) );
         //make sure windows do not overlay each other

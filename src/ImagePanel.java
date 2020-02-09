@@ -45,7 +45,7 @@ class ImagePanel extends JPanel implements MouseMotionListener {
     private boolean  mMouseMoveValid = false;  ///< is mouse (x,y) below valid?
     private int      mMouseX;                  ///< mouse movement x position
     private int      mMouseY;                  ///< mouse movement y position
-    private Image    mDoubleBuffer = null;     ///< to avoid flicker
+    //private Image    mDoubleBuffer = null;     ///< to avoid flicker
     public  double   mZoom = 1.0;              ///< zoom/scale factor
     //----------------------------------------------------------------------
     /** \brief Ctor.
@@ -78,13 +78,14 @@ class ImagePanel extends JPanel implements MouseMotionListener {
         //if the size of the panel has changed, we need a new doublebuffer of
         // the correct size
         Dimension  d = getSize();
-        if ( mDoubleBuffer==null || mDoubleBuffer.getWidth(null)!=d.width
-          || mDoubleBuffer.getHeight(null)!=d.height ) {
-            mDoubleBuffer = createImage( d.width, d.height );
-        }
+        //if ( mDoubleBuffer==null || mDoubleBuffer.getWidth(null)!=d.width
+        //  || mDoubleBuffer.getHeight(null)!=d.height ) {
+        //    mDoubleBuffer = createImage( d.width, d.height );
+        //}
 
         //draw into the doublebuffer
-        Graphics  dbg = mDoubleBuffer.getGraphics();
+        //Graphics  dbg = mDoubleBuffer.getGraphics();
+        Graphics  dbg = g;
         dbg.setColor( Color.DARK_GRAY );
         dbg.fillRect( 0, 0, d.width, d.height );
         if (mParent.mImage!=null && mParent.mImage.mDisplayImage!=null) {
@@ -102,7 +103,7 @@ class ImagePanel extends JPanel implements MouseMotionListener {
         }
 
         //draw the doublebuffer on the panel
-        g.drawImage( mDoubleBuffer, 0, 0, null );
+        //g.drawImage( mDoubleBuffer, 0, 0, null );
     }
     //----------------------------------------------------------------------
     /** \brief Track mouse movement when button is not down.
