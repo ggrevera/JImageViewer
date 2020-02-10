@@ -105,11 +105,14 @@ class ImagePanel extends JPanel implements MouseMotionListener {
         }
 
         if (mMouseMoveValid) {
+            //we must add offset when scrolled.
+            int xOff = mParent.mJsp.getViewport().getViewPosition().x;
+            int yOff = mParent.mJsp.getViewport().getViewPosition().y;
             //report position
             dbg.setColor( Color.BLACK );
-            dbg.drawString( "(" + mMouseX + "," + mMouseY + ")", 20, 40 );
+            dbg.drawString( "(" + mMouseX + "," + mMouseY + ")", 20+xOff, 40+yOff );
             dbg.setColor( Color.WHITE );
-            dbg.drawString( "(" + mMouseX + "," + mMouseY + ")", 21, 41 );
+            dbg.drawString( "(" + mMouseX + "," + mMouseY + ")", 21+xOff, 41+yOff );
         }
 
         //draw the doublebuffer on the panel
