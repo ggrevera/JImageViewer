@@ -29,13 +29,15 @@
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.File;
 import java.util.prefs.Preferences;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 //----------------------------------------------------------------------
 /** \brief instantiate this class to display an image */
-public class JImageViewer extends JFrame implements ActionListener {
+public class JImageViewer extends JFrame implements ActionListener, KeyListener {
 
     JMenuBar    mMenuBar    = new JMenuBar();                   ///< menu bar
     JMenu       mFile       = new JMenu( "File" );           ///< file menu item
@@ -99,6 +101,7 @@ public class JImageViewer extends JFrame implements ActionListener {
         windowPosition %= 800;
         pack();
         setVisible( true );
+        addKeyListener( this );
     }
     //----------------------------------------------------------------------
     /** \brief Respond to menu actions.
@@ -170,6 +173,19 @@ public class JImageViewer extends JFrame implements ActionListener {
         mSaveAs.addActionListener( this );
         mExit.addActionListener( this );
     }
+    //----------------------------------------------------------------------
+    /** unused */
+    @Override
+    public void keyTyped ( KeyEvent e ) { }
+    //----------------------------------------------------------------------
+    @Override
+    public void keyPressed ( KeyEvent e ) {
+        System.out.println( "keyPressed" );
+    }
+    //----------------------------------------------------------------------
+    /** unused */
+    @Override
+    public void keyReleased ( KeyEvent e ) { }
 
 }
 //----------------------------------------------------------------------

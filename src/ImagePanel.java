@@ -31,7 +31,8 @@ import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.awt.Graphics;
-import java.awt.Image;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 
 import javax.swing.JPanel;
 //----------------------------------------------------------------------
@@ -47,6 +48,13 @@ class ImagePanel extends JPanel implements MouseMotionListener {
     private int      mMouseY;                  ///< mouse movement y position
     //private Image    mDoubleBuffer = null;     ///< to avoid flicker
     public  double   mZoom = 1.0;              ///< zoom/scale factor
+    /**
+     * image rendering hints ("quality"):
+     *   VALUE_INTERPOLATION_NEAREST_NEIGHBOR
+     *   VALUE_INTERPOLATION_BILINEAR
+     *   VALUE_INTERPOLATION_BICUBIC
+     */
+    public  Object   mRH = RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR;
     //----------------------------------------------------------------------
     /** \brief Ctor.
      *  \param p refers to JImageViewer in which this ImagePanel appears
@@ -75,6 +83,8 @@ class ImagePanel extends JPanel implements MouseMotionListener {
      *  \returns nothing (void)
      */
     public void paint ( Graphics g ) {
+        Graphics2D g2 = (Graphics2D) g;
+        RenderingHints rh = new RenderingHints( RenderingHints.KEY_INTERPOLATION, mRH );
         //if the size of the panel has changed, we need a new doublebuffer of
         // the correct size
         Dimension  d = getSize();
