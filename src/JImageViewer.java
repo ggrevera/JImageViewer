@@ -108,6 +108,7 @@ public class JImageViewer extends JFrame implements ActionListener, KeyListener 
      *  \param e action event
      *  \returns nothing (void)
      */
+    @Override
     public void actionPerformed ( ActionEvent e ) {
         if (e.getSource() == mExit) {
             System.exit(0);

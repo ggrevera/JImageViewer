@@ -42,6 +42,7 @@ import javax.swing.JPanel;
  *  BE SURE YOU MAKE the ^M USING "CTRL-V CTRL-M" NOT BY TYPING "CARROT M"!
  */
 class ImagePanel extends JPanel implements MouseMotionListener {
+
     JImageViewer     mParent;                  ///< reference to JImageViewer in which this ImagePanel appears
     private boolean  mMouseMoveValid = false;  ///< is mouse (x,y) below valid?
     private int      mMouseX;                  ///< mouse movement x position
@@ -70,6 +71,7 @@ class ImagePanel extends JPanel implements MouseMotionListener {
      *  \param g graphics context
      *  \returns nothing (void)
      */
+    @Override
     public void update ( Graphics g ) {
 	paint( g );
     }
@@ -82,6 +84,7 @@ class ImagePanel extends JPanel implements MouseMotionListener {
      *  \param g graphics context
      *  \returns nothing (void)
      */
+    @Override
     public void paint ( Graphics g ) {
         Graphics2D g2 = (Graphics2D) g;
         RenderingHints rh = new RenderingHints( RenderingHints.KEY_INTERPOLATION, mRH );
@@ -123,6 +126,7 @@ class ImagePanel extends JPanel implements MouseMotionListener {
      *  \param e mouse event
      *  \returns nothing (void)
      */
+    @Override
     public void mouseMoved ( MouseEvent e ) {
         mMouseMoveValid = true;
         mMouseX = e.getX();
@@ -134,12 +138,14 @@ class ImagePanel extends JPanel implements MouseMotionListener {
      *  \param e mouse event
      *  \returns nothing (void)
      */
+    @Override
     public void mouseDragged ( MouseEvent e ) {
         mMouseMoveValid = true;
         mMouseX = e.getX();
         mMouseY = e.getY();
         repaint();
     }
+
 }
 //----------------------------------------------------------------------
 
