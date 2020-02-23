@@ -138,7 +138,17 @@ public class JImageViewer extends JFrame implements ActionListener, KeyListener 
                 //handle multiple file selection
                 File[] f = chooser.getSelectedFiles();
                 for (int i=0; i<f.length; i++) {
-                    new JImageViewer( f[i].getAbsolutePath() );
+                    //if this window doesn't have an image, load an image for this window.
+                    if (this.mImage == null) {
+                        this.mImage = ImageData.load( f[i].getAbsolutePath() );
+                        this.mImagePanel.setPreferredSize( new Dimension(mImage.mW,mImage.mH) );
+                        setTitle( "JImageViewer: " + f[i].getAbsolutePath() );
+                        mJsp.updateUI();  //otherwise, scrollbars may not appear (until resize)
+                        repaint();
+                    } else {
+                        //new window w/ image
+                        new JImageViewer( f[i].getAbsolutePath() );
+                    }
                 }
             }
         } else {

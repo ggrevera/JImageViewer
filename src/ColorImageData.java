@@ -46,7 +46,7 @@ public class ColorImageData extends ImageData {
      *  \param h image height
      *  \returns nothing (ctor)
      */
-    protected ColorImageData ( BufferedImage bi, int w, int h ) {
+    protected ColorImageData ( BufferedImage bi, int w, int h  ) {
         mOriginalData = bi.getData().getPixels( 0, 0, w, h, (int[])null );
         System.out.println( mOriginalData.length );
         System.out.println( w*h );
@@ -119,22 +119,6 @@ public class ColorImageData extends ImageData {
             if (b > 255)    b = 255;
 
             packed[i] = (r<<16) | (g<<8) | b;
-        }
-        mDisplayImage.setRGB( 0, 0, mW, mH, packed, 0, mW );
-    }
-
-    public void old_unpacked2packed ( int[] unpacked, int[] packed ) {
-        for (int i=0,j=0; i<packed.length; i++) {
-            assert( 0<=unpacked[j] && unpacked[j]<=255 );  //check range
-            final int  r = unpacked[j++] & 0xff;
-
-            assert( 0<=unpacked[j] && unpacked[j]<=255 );  //check range
-            final int  g = unpacked[j++] & 0xff;
-
-            assert( 0<=unpacked[j] && unpacked[j]<=255 );  //check range
-            final int  b = unpacked[j++] & 0xff;
-
-            packed[i] = (r << 16) | (g << 8) | b;
         }
         mDisplayImage.setRGB( 0, 0, mW, mH, packed, 0, mW );
     }
