@@ -74,11 +74,11 @@ public class PNMHelper {
     /** image samples per pixel (1=gray, 3=color) */
     public int     mSamplesPerPixel;
     /** minimum of image data */
-    public int      mMin;
+    public int     mMin;
     /** maximum of image data */
-    public int      mMax;
+    public int     mMax;
     /** image pixel data */
-    public int[]    mData;
+    public int[]   mData;
     //--------------------------------------------------------------------
     /**
      * ctor for an empty image of the specified width, height, and type.
@@ -185,10 +185,7 @@ public class PNMHelper {
             if (i==0)               mMin = tMax = mData[0];
             if (mData[i] < mMin)    mMin = mData[i];
             if (mData[i] > tMax)    tMax = mData[i];
-            if ((i%mW) == 0) {
-                System.out.print( "." );
-                System.out.flush();
-            }
+            if ((i%mW) == 0) {  System.out.print( "." );  System.out.flush();  }
         }
         assert tMax == mMax;
     }
@@ -208,10 +205,7 @@ public class PNMHelper {
                     if (i==0)               mMin = tMax = mData[0];
                     if (mData[i] < mMin)    mMin = mData[i];
                     if (mData[i] > tMax)    tMax = mData[i];
-                    if ((i%mW) == 0) {
-                        System.out.print( "." );
-                        System.out.flush();
-                    }
+                    if ((i%mW) == 0) {  System.out.print( "." );  System.out.flush();  }
                 }
             } else {
                 assert mMax <= Short.MAX_VALUE;
@@ -223,10 +217,7 @@ public class PNMHelper {
                     if (i==0)               mMin = tMax = mData[0];
                     if (mData[i] < mMin)    mMin = mData[i];
                     if (mData[i] > tMax)    tMax = mData[i];
-                    if ((i%mW) == 0) {
-                        System.out.print( "." );
-                        System.out.flush();
-                    }
+                    if ((i%mW) == 0) {  System.out.print( "." );  System.out.flush();  }
                 }
             }
             in.close();

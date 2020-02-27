@@ -74,57 +74,101 @@ abstract public class ImageData {
     public int[]  mDisplayData;
 
     public BufferedImage  mDisplayImage  = null;  ///< \brief (possibly modified input) image drawn on screen
-  //----------------------------------------------------------------------
-  /** \brief Given the name of an input image file, this method determine
-   *  the type of image and then invokes the appropriate constructor.
-   *
-   *  Note that this static function returns the appropriate subclass of
-   *  ImageData depending upon the type of image data (color or gray).
-   *  \param fileName name of input image file
-   *  \returns an instance of the ImageData class
-   */
-  public static ImageData load ( String fileName ) {
-      //load the image
-      String up = fileName.toUpperCase();
-      if (up.endsWith(".PPM") || up.endsWith(".PNM") || up.endsWith(".PGM")) {
-          PNMHelper p = new PNMHelper( fileName );
-          if (p.mMin < 0) {
-              JOptionPane.showMessageDialog( null,
-                      "Warning: \n\nMin value of " + p.mMin + " is less than 0. \n ",
-                      "Warning", JOptionPane.WARNING_MESSAGE );
-          }
-          if (p.mMax > 255) {
-              JOptionPane.showMessageDialog( null,
-                      "Warning: \n\nMax value of " + p.mMax + " exceeds limit of 255. \n ",
-                      "Warning", JOptionPane.WARNING_MESSAGE );
-          }
-          if (p.mSamplesPerPixel == 1) {
-              return new GrayImageData( p.mData, p.mW, p.mH );
-          } else {
-              assert p.mSamplesPerPixel == 3;
-              return new ColorImageData( p.mData, p.mW, p.mH );
-          }
-      }
+    //----------------------------------------------------------------------
+    /** \brief Given the name of an input image file, this method determine
+     *  the type of image and then invokes the appropriate constructor.
+     *
+     *  Note that this static function returns the appropriate subclass of
+     *  ImageData depending upon the type of image data (color or gray).
+     *  \param fileName name of input image file
+     *  \returns an instance of the ImageData class
+     */
+    public static ImageData load ( String fileName ) {
+        //load the image
+        String up = fileName.toUpperCase();
+        if (up.endsWith(".PPM") || up.endsWith(".PNM") || up.endsWith(".PGM")) {
+            PNMHelper p = new PNMHelper( fileName );
+            if (p.mMin < 0) {
+                JOptionPane.showMessageDialog( null,
+                        "Warning: \n\nMin value of " + p.mMin + " is less than 0. \n ",
+                        "Warning", JOptionPane.WARNING_MESSAGE );
+            }
+            if (p.mMax > 255) {
+                JOptionPane.showMessageDialog( null,
+                        "Warning: \n\nMax value of " + p.mMax + " exceeds limit of 255. \n ",
+                        "Warning", JOptionPane.WARNING_MESSAGE );
+            }
+            if (p.mSamplesPerPixel == 1) {
+                return new GrayImageData( p.mData, p.mW, p.mH );
+            } else {
+                assert p.mSamplesPerPixel == 3;
+                return new ColorImageData( p.mData, p.mW, p.mH );
+            }
+        }
 
-      File f = new File( fileName );
-      BufferedImage bi = null;
-      try {
-          bi = ImageIO.read( f );
-      } catch (Exception e) {
-          System.err.println( "error reading file" );
-      }
-      assert bi != null;
-      int w  = bi.getWidth();
-      int h  = bi.getHeight();
-      if ( bi.getType() == BufferedImage.TYPE_USHORT_GRAY ||
-           bi.getType() == BufferedImage.TYPE_BYTE_GRAY   ||
-           bi.getType() == BufferedImage.TYPE_BYTE_BINARY ) {
-          return new GrayImageData( bi, w, h );
-      }
-      //otherwise, it must be color
-      //assert bi.getType() == BufferedImage.TYPE_INT_RGB;
-      return new ColorImageData( bi, w, h );
-  }
+        File f = new File( fileName );
+        BufferedImage bi = null;
+        try {
+            bi = ImageIO.read( f );
+        } catch (Exception e) {
+            System.err.println( "error reading file" );
+        }
+        assert bi != null;
+        int w  = bi.getWidth();
+        int h  = bi.getHeight();
+        if ( bi.getType() == BufferedImage.TYPE_USHORT_GRAY ||
+             bi.getType() == BufferedImage.TYPE_BYTE_GRAY   ||
+             bi.getType() == BufferedImage.TYPE_BYTE_BINARY ) {
+            return new GrayImageData( bi, w, h );
+        }
+        //otherwise, it must be color
+        //assert bi.getType() == BufferedImage.TYPE_INT_RGB;
+        return new ColorImageData( bi, w, h );
+    }
+    //----------------------------------------------------------------------
+    /** \brief  Given an instance (of a subclass) of ImageData, construct
+     * and return a clone of it.
+     *
+     *  Note that this static function returns the appropriate subclass of
+     *  ImageData depending upon the type of image data (color or gray).
+     *
+     *  \param    other is the object to clone
+     *  \returns  an instance of the ImageData class (actually the correct
+     *            subclass of ImageData because ImageData is abstract)
+     */
+    static public ImageData clone ( ImageData other ) {
+        if (other instanceof GrayImageData) {
+            GrayImageData copy = new GrayImageData( other.mOriginalData, other.mW, other.mH );
+            copy.mIsAudio = other.mIsAudio;
+            copy.mRate = other.mRate;
+            return copy;
+        }
+        if (other instanceof ColorImageData) {
+            ColorImageData copy = new ColorImageData( other.mOriginalData, other.mW, other.mH );
+            copy.mIsAudio = other.mIsAudio;
+            copy.mRate = other.mRate;
+            return copy;
+        }
+        return null;
+    }
+    //----------------------------------------------------------------------
+    /** this function is NOT in the original start up app. it simply
+     * copies the display data to the original data (and sets min and
+     * max accordingly. it was added to make pipelines of Strategies
+     * easier. for example, opening is erosion followed by dilation.
+     * so OpeningStrategy = ErosionStrategy then makePermanent then
+     * DilationStrategy then makePermanent. this approach may be used
+     * with any strategy: XStategy then makePermanent.
+     */
+    public void makePermanent ( ) {
+        this.mMax = this.mMin = this.mDisplayData[ 0 ];
+        for (int i = 0; i < this.mDisplayData.length; i++) {
+            int v = this.mDisplayData[ i ];
+            if (v < this.mMin) this.mMin = v;
+            if (v > this.mMax) this.mMax = v;
+            this.mOriginalData[ i ] = v;
+        }
+    }
 
 }
 //----------------------------------------------------------------------
